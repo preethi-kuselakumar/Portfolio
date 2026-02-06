@@ -21,7 +21,7 @@ const Navbar = () => {
     >
       <div className="container-fluid px-lg-5">
         <a className="navbar-brand" href="#home">
-          Preethi
+          Preethi K
         </a>
         <button
           className="navbar-toggler"
