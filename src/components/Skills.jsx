@@ -1,111 +1,129 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNode, FaDatabase, FaGitAlt, FaGithub, FaCode } from 'react-icons/fa';
+import { useRef, useState } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { THEME } from '../theme';
+import { SKILLS, TOOLS } from '../data/skills';
+import SectionLabel from './ui/SectionLabel';
+import SectionTitle from './ui/SectionTitle';
 
-const Skills = () => {
-  const { ref, inView } = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
-  const skills = {
-    frontend: [
-      { name: 'HTML', icon: FaHtml5 },
-      { name: 'CSS', icon: FaCss3Alt },
-      { name: 'JavaScript', icon: FaJs },
-      { name: 'React', icon: FaReact },
-    ],
-    backend: [
-      { name: 'Node.js', icon: FaNode },
-      { name: 'Databases', icon: FaDatabase },
-      { name: 'REST APIs', icon: FaCode },
-    ],
-    tools: [
-      { name: 'Git', icon: FaGitAlt },
-      { name: 'GitHub', icon: FaGithub },
-      { name: 'VS Code', icon: FaCode },
-    ],
-  };
-
-  const SkillCard = ({ skill }) => {
-    const IconComponent = skill.icon;
-    return (
-      <motion.div
-        className="skill-card"
-        variants={itemVariants}
-        whileHover={{
-          scale: 1.05,
-          transition: { duration: 0.2 },
-        }}
-      >
-        <IconComponent className="skill-icon" />
-        <span className="skill-name">{skill.name}</span>
-      </motion.div>
-    );
-  };
+function SkillBar({ name, level, index }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
 
   return (
-    <motion.section
-      id="skills"
-      className="skills"
-      ref={ref}
-      variants={containerVariants}
-      initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
-    >
-      <div className="skills-container">
-        <motion.h2 className="section-title">Skills & Expertise</motion.h2>
-
-        <motion.div className="skill-category" variants={itemVariants}>
-          <h3>Frontend</h3>
-          <div className="skill-grid">
-            {skills.frontend.map((skill, index) => (
-              <SkillCard key={index} skill={skill} />
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div className="skill-category" variants={itemVariants}>
-          <h3>Backend</h3>
-          <div className="skill-grid">
-            {skills.backend.map((skill, index) => (
-              <SkillCard key={index} skill={skill} />
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div className="skill-category" variants={itemVariants}>
-          <h3>Tools</h3>
-          <div className="skill-grid">
-            {skills.tools.map((skill, index) => (
-              <SkillCard key={index} skill={skill} />
-            ))}
-          </div>
-        </motion.div>
+    <div ref={ref} style={{ marginBottom: 20 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+        <span style={{ color: '#fff', fontSize: 14, fontFamily: "'DM Sans', sans-serif" }}>{name}</span>
+        <span style={{ color: THEME.colors.cyan, fontSize: 13, fontFamily: "'Space Mono', monospace" }}>{level}%</span>
       </div>
-    </motion.section>
+      <div style={{ height: 4, background: 'rgba(255,255,255,0.06)', borderRadius: 4, overflow: 'hidden' }}>
+        <motion.div
+          initial={{ width: 0 }}
+          animate={inView ? { width: `${level}%` } : {}}
+          transition={{ duration: 1.2, delay: index * 0.07, ease: 'easeOut' }}
+          style={{
+            height: '100%',
+            background: `linear-gradient(90deg, ${THEME.colors.cyan}, rgba(0,229,204,0.4))`,
+            borderRadius: 4,
+            boxShadow: `0 0 10px ${THEME.colors.cyan}55`,
+          }}
+        />
+      </div>
+    </div>
   );
-};
+}
 
-export default Skills;
+export default function Skills() {
+  const categories = [...new Set(SKILLS.map((s) => s.category))];
+  const [active, setActive] = useState('Frontend');
+
+  return (
+    <section id="skills" style={{ padding: THEME.spacing.section, maxWidth: 1100, margin: '0 auto' }}>
+      <SectionLabel>Technical Skills</SectionLabel>
+      <SectionTitle>
+        What I work
+        <br />
+        with <span style={{ color: THEME.colors.cyan }}>every day</span>
+      </SectionTitle>
+
+      <div style={{ display: 'flex', gap: 12, marginBottom: 48, flexWrap: 'wrap' }}>
+        {categories.map((cat) => (
+          <motion.button
+            key={cat}
+            onClick={() => setActive(cat)}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            style={{
+              padding: '8px 20px',
+              borderRadius: 8,
+              cursor: 'pointer',
+              fontFamily: "'Space Mono', monospace",
+              fontSize: 13,
+              letterSpacing: 1,
+              border: `1px solid ${active === cat ? THEME.colors.cyan : 'rgba(255,255,255,0.15)'}`,
+              background: active === cat ? `${THEME.colors.cyan}18` : 'transparent',
+              color: active === cat ? THEME.colors.cyan : 'rgba(255,255,255,0.5)',
+              transition: 'all 0.2s',
+            }}
+          >
+            {cat}
+          </motion.button>
+        ))}
+      </div>
+
+      <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+        <div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {SKILLS.filter((s) => s.category === active).map((skill, i) => (
+                <SkillBar key={skill.name} name={skill.name} level={skill.level} index={i} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, alignContent: 'start' }}>
+          {TOOLS.map((tool, i) => (
+            <motion.div
+              key={tool.name}
+              initial={{ opacity: 0, scale: 0.7 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04 }}
+              whileHover={{ y: -4, borderColor: `${THEME.colors.cyan}66`, boxShadow: `0 0 16px ${THEME.colors.cyan}22` }}
+              style={{
+                background: THEME.colors.cardBg,
+                border: `1px solid ${THEME.colors.border}`,
+                borderRadius: 12,
+                padding: '14px 8px',
+                textAlign: 'center',
+                cursor: 'default',
+                backdropFilter: 'blur(8px)',
+              }}
+            >
+              <div style={{ fontSize: 22, color: THEME.colors.cyan, display: 'flex', justifyContent: 'center' }}>
+                <tool.Icon aria-hidden />
+              </div>
+              <div
+                style={{
+                  color: 'rgba(255,255,255,0.6)',
+                  fontSize: 10,
+                  marginTop: 6,
+                  fontFamily: "'Space Mono', monospace",
+                  letterSpacing: 0.5,
+                }}
+              >
+                {tool.name}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,46 +1,40 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiMail } from 'react-icons/fi';
+import { NAV_LINKS } from '../data/navLinks';
+import { THEME } from '../theme';
 
-const Footer = () => {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
-
   return (
-    <motion.footer
-      className="footer"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }}
-    >
-      <div className="footer-content">
-        <a
-          href="https://github.com/preethi-kuselakumar"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footer-link"
-        >
-          <FiGithub className="footer-icon" />
-          GitHub
-        </a>
-        <a href="mailto:kpreethi706@gmail.com" className="footer-link">
-          <FiMail className="footer-icon" />
-          Email
-        </a>
+    <footer style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '40px', textAlign: 'center' }}>
+      <div style={{ marginBottom: 20 }}>
+        <span style={{ fontFamily: "'Space Mono', monospace", color: THEME.colors.cyan, fontSize: 20, fontWeight: 700 }}>
+          PK<span style={{ color: '#fff' }}>.</span>
+        </span>
       </div>
-      <p className="footer-copyright">
-        © {currentYear} Preethi K. All rights reserved.
-      </p>
-    </motion.footer>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginBottom: 20, flexWrap: 'wrap' }}>
+        {NAV_LINKS.map((l) => (
+          <motion.button
+            key={l}
+            onClick={() => document.getElementById(l.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })}
+            whileHover={{ color: THEME.colors.cyan }}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'rgba(255,255,255,0.35)',
+              fontFamily: "'Space Mono', monospace",
+              fontSize: 12,
+              cursor: 'pointer',
+              letterSpacing: 1,
+              transition: 'color 0.2s',
+            }}
+          >
+            {l}
+          </motion.button>
+        ))}
+      </div>
+      <div style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12, fontFamily: "'Space Mono', monospace" }}>
+        © {currentYear} Preethi K · Built with React
+      </div>
+    </footer>
   );
-};
-
-export default Footer;
+}
