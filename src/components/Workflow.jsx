@@ -4,12 +4,12 @@ import SectionLabel from './ui/SectionLabel';
 import SectionTitle from './ui/SectionTitle';
 
 const WORKFLOW = [
-  { step: '01', title: 'Plan', desc: 'Understand requirements, break tasks down, and decide the right UI/UX approach.' },
-  { step: '02', title: 'Build Components', desc: 'Create reusable React components with clean props and structure.' },
-  { step: '03', title: 'Integrate APIs', desc: 'Connect endpoints with good loading, error, and success states.' },
-  { step: '04', title: 'Polish UX', desc: 'Improve interactions, add subtle motion, and ensure accessibility basics.' },
-  { step: '05', title: 'Test & Debug', desc: 'Check edge cases, fix issues, and validate on mobile/desktop.' },
-  { step: '06', title: 'Deploy', desc: 'Build, preview, and publish updates with confidence.' },
+  { step: '01', title: 'Scope & Plan', desc: 'Clarify requirements, break stories into tasks, and track progress in ClickUp.' },
+  { step: '02', title: 'Design → UI', desc: 'Translate designs into reusable React components with consistent styling and behavior.' },
+  { step: '03', title: 'API + State', desc: 'Integrate REST APIs using Axios + React Query with caching, retries, and clean UI states.' },
+  { step: '04', title: 'Auth + Realtime', desc: 'Implement OAuth Bearer authentication and real-time messaging with WebSocket when needed.' },
+  { step: '05', title: 'Validate & Debug', desc: 'Test endpoints in Postman, debug edge cases, and ensure responsive behavior across devices.' },
+  { step: '06', title: 'Ship', desc: 'Merge via Git/GitHub and support CI/CD releases through Jenkins with stable, reviewable changes.' },
 ];
 
 export default function Workflow() {

@@ -1,5 +1,15 @@
 export const PROJECTS = [
   {
+    title: 'Textellent 3.0',
+    subtitle: 'Professional Work · Business SMS & Messaging Platform',
+    desc: 'Contributed to the React-based frontend for Textellent 3.0, including authentication flows and messaging screens as part of a migration from a legacy jQuery UI.',
+    tags: ['React', 'Bootstrap 5', 'OAuth Bearer', 'REST API'],
+    type: 'Professional',
+    highlight: true,
+    githubUrl: null,
+    liveUrl: 'https://client.textellent.com/service/3.0/login',
+  },
+  {
     title: 'CRUD Ops',
     subtitle: 'Full-Stack MERN Application',
     desc: 'Full-stack CRUD application using MongoDB, Express, React, and Node.js with Axios for API communication.',
@@ -17,16 +27,6 @@ export const PROJECTS = [
     type: 'Personal',
     highlight: false,
     githubUrl: 'https://github.com/preethi-kuselakumar/Weather-App',
-    liveUrl: null,
-  },
-  {
-    title: 'Coming Soon',
-    subtitle: 'New Projects in Progress',
-    desc: 'More projects are being developed and will be added to the portfolio.',
-    tags: ['React'],
-    type: 'Soon',
-    highlight: false,
-    githubUrl: null,
     liveUrl: null,
   },
 ];
