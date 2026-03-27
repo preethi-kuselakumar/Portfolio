@@ -159,8 +159,8 @@ export default function Hero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           style={{
             fontFamily: "'Sora', sans-serif",
-            fontSize: 'clamp(3rem, 8vw, 6rem)',
-            fontWeight: 800,
+            fontSize: 'clamp(3rem, 8vw, 4.5rem)',
+            fontWeight: 700,
             lineHeight: 1.05,
             color: '#fff',
             marginBottom: 8,
