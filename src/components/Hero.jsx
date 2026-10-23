@@ -1,25 +1,5 @@
-import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiChevronDown, FiDownload, FiFileText } from 'react-icons/fi';
 import { THEME } from '../theme';
-import { useTypingEffect } from '../hooks/useTypingEffect';
-import resumePdf from '../assets/resume.pdf';
-
-const resumeButtonStyle = {
-  padding: '14px 28px',
-  borderRadius: 10,
-  background: `linear-gradient(135deg, ${THEME.colors.cyan}, #7CF7EA)`,
-  color: THEME.colors.navy,
-  border: 'none',
-  fontFamily: "'Space Mono', monospace",
-  fontWeight: 700,
-  fontSize: 14,
-  cursor: 'pointer',
-  letterSpacing: 1,
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 10,
-};
 
 const githubButtonStyle = {
   padding: '14px 32px',
@@ -39,9 +19,6 @@ const githubButtonStyle = {
 };
 
 export default function Hero() {
-  const [showResumeMenu, setShowResumeMenu] = useState(false);
-  const typed = useTypingEffect(['Frontend Developer', 'React Developer', 'UI Builder', 'API Integrator']);
-
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -116,84 +93,27 @@ export default function Hero() {
           margin: '0 auto',
         }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-            background: 'rgba(0,229,204,0.08)',
-            border: `1px solid ${THEME.colors.cyan}33`,
-            borderRadius: 100,
-            padding: '6px 16px',
-            marginBottom: 32,
-          }}
-        >
-          <span
-            style={{
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              background: THEME.colors.cyan,
-              display: 'block',
-              animation: 'blink 1.5s infinite',
-            }}
-          />
-          <span
-            style={{
-              color: THEME.colors.cyan,
-              fontSize: 12,
-              fontFamily: "'Space Mono', monospace",
-              letterSpacing: 2,
-            }}
-          >
-            AVAILABLE FOR WORK
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
           style={{
             fontFamily: "'Sora', sans-serif",
             fontSize: 'clamp(3rem, 8vw, 4.5rem)',
             fontWeight: 700,
             lineHeight: 1.05,
             color: '#fff',
-            marginBottom: 8,
+            marginBottom: 24,
             letterSpacing: -1,
           }}
         >
           Preethi K
         </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
-            color: THEME.colors.cyan,
-            height: 40,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 4,
-            marginBottom: 24,
-          }}
-        >
-          <span>{typed}</span>
-          <span style={{ animation: 'blink 1s infinite', color: THEME.colors.cyan }}>|</span>
-        </motion.div>
-
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: 0.4 }}
           style={{
             color: 'rgba(255,255,255,0.55)',
             fontSize: 17,
@@ -209,78 +129,9 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
+          transition={{ delay: 0.6 }}
           style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}
         >
-          <div style={{ position: 'relative' }}>
-            <motion.button
-              type="button"
-              onClick={() => setShowResumeMenu((open) => !open)}
-              whileHover={{ scale: 1.05, boxShadow: `0 0 30px ${THEME.colors.cyan}55` }}
-              whileTap={{ scale: 0.97 }}
-              style={resumeButtonStyle}
-            >
-              <FiFileText size={18} />
-              Resume
-              <FiChevronDown size={16} />
-            </motion.button>
-
-            {showResumeMenu && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '110%',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  background: '#050d1f',
-                  border: `1px solid ${THEME.colors.cyan}33`,
-                  borderRadius: 10,
-                  padding: 8,
-                  minWidth: 190,
-                  boxShadow: '0 18px 45px rgba(0,0,0,0.45)',
-                  zIndex: 10,
-                }}
-              >
-                <a
-                  href={resumePdf}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '8px 10px',
-                    borderRadius: 6,
-                    color: '#fff',
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 13,
-                    textDecoration: 'none',
-                  }}
-                >
-                  <FiFileText size={16} />
-                  <span>View PDF</span>
-                </a>
-                <a
-                  href={resumePdf}
-                  download="Preethi_K_Resume.pdf"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '8px 10px',
-                    borderRadius: 6,
-                    color: 'rgba(255,255,255,0.85)',
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 13,
-                    textDecoration: 'none',
-                  }}
-                >
-                  <FiDownload size={16} />
-                  <span>Download PDF</span>
-                </a>
-              </div>
-            )}
-          </div>
           <motion.a
             href="https://github.com/preethi-kuselakumar"
             target="_blank"
@@ -310,58 +161,6 @@ export default function Hero() {
             Let&apos;s Connect
           </motion.button>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4 }}
-          style={{ display: 'flex', gap: 48, justifyContent: 'center', marginTop: 64, flexWrap: 'wrap' }}
-        >
-          {[{ n: '10+', label: 'Technologies' }, { n: '2+', label: 'Projects' }, { n: '100%', label: 'Learning' }].map((s) => (
-            <div key={s.label} style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: "'Sora', sans-serif", fontSize: 28, fontWeight: 800, color: THEME.colors.cyan }}>
-                {s.n}
-              </div>
-              <div
-                style={{
-                  color: 'rgba(255,255,255,0.4)',
-                  fontSize: 11,
-                  fontFamily: "'Space Mono', monospace",
-                  letterSpacing: 2,
-                  textTransform: 'uppercase',
-                  marginTop: 4,
-                }}
-              >
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        style={{
-          position: 'absolute',
-          bottom: 32,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 8,
-        }}
-      >
-        <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 10, fontFamily: "'Space Mono', monospace", letterSpacing: 3 }}>
-          SCROLL
-        </span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          style={{ width: 1, height: 40, background: `linear-gradient(${THEME.colors.cyan}, transparent)` }}
-        />
       </motion.div>
     </section>
   );

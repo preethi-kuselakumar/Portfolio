@@ -1,23 +1,34 @@
 export const PROJECTS = [
   {
+    title: 'Super Solar Power Fencing Technology',
+    subtitle: 'Freelance · Business Website',
+    points: [
+      'Designed and developed a fully responsive business website using React, Next.js, TypeScript, and Tailwind CSS, with reusable UI components across multiple pages.',
+      'Built a product catalog with client-side search, image galleries, carousels, and YouTube integration, and integrated Sanity CMS for client-managed content.',
+      'Optimized images and user experience using Next.js Image and Framer Motion, and deployed the website on Vercel.',
+    ],
+    tags: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'Framer Motion'],
+    type: 'Freelance',
+    highlight: true,
+    liveUrl: 'https://supersolarfence.com/',
+    liveLabel: 'Preview',
+  },
+  {
     title: 'Textellent 3.0',
     subtitle: 'Professional Work · Business SMS & Messaging Platform',
     desc: 'Contributed to the React-based frontend for Textellent 3.0, including authentication flows and messaging screens as part of a migration from a legacy jQuery UI.',
     tags: ['React', 'Bootstrap 5', 'OAuth Bearer', 'REST API'],
     type: 'Professional',
-    highlight: true,
-    githubUrl: null,
+    highlight: false,
     liveUrl: 'https://client.textellent.com/service/3.0/login',
   },
   {
     title: 'CRUD Ops',
     subtitle: 'Full-Stack MERN Application',
-    desc: 'Full-stack CRUD application using MongoDB, Express, React, and Node.js with Axios for API communication.',
-    tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Axios'],
+    desc: 'Full-stack CRUD application using MongoDB, Express, React, and Node.js for API communication.',
+    tags: ['MongoDB', 'Express', 'React', 'Node.js'],
     type: 'Personal',
     highlight: false,
-    githubUrl: 'https://github.com/preethi-kuselakumar/CrudOps',
-    liveUrl: null,
   },
   {
     title: 'Weather App',
@@ -26,8 +37,5 @@ export const PROJECTS = [
     tags: ['React', 'REST API', 'OpenWeather', 'CSS'],
     type: 'Personal',
     highlight: false,
-    githubUrl: 'https://github.com/preethi-kuselakumar/Weather-App',
-    liveUrl: null,
   },
 ];
-

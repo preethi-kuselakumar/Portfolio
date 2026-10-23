@@ -14,7 +14,7 @@ export default function Skills() {
         with <span style={{ color: THEME.colors.cyan }}>every day</span>
       </SectionTitle>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, alignContent: 'start' }}>
+      <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, alignContent: 'start' }}>
         {TOOLS.map((tool, i) => (
           <motion.div
             key={tool.name}

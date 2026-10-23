@@ -75,7 +75,7 @@ export default function Contact() {
             {[
               { label: 'Email', val: 'kpreethi706@gmail.com', href: 'mailto:kpreethi706@gmail.com' },
               { label: 'GitHub', val: 'github.com/preethi-kuselakumar', href: 'https://github.com/preethi-kuselakumar' },
-              { label: 'LinkedIn', val: 'linkedin.com/in/preethi-kuselakumar', href: 'https://linkedin.com/in/preethi-kuselakumar' },
+              { label: 'LinkedIn', val: 'linkedin.com/in/kpreethi1509', href: 'https://linkedin.com/in/kpreethi1509' },
             ].map((item) => (
               <motion.a
                 key={item.label}

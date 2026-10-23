@@ -14,7 +14,7 @@ export default function Projects() {
         <span style={{ color: THEME.colors.cyan }}>built</span>
       </SectionTitle>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
+      <div className="projects-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 24 }}>
         {PROJECTS.map((proj, i) => (
           <motion.div
             key={proj.title}
@@ -32,6 +32,7 @@ export default function Projects() {
               opacity: proj.type === 'Soon' ? 0.5 : 1,
               position: 'relative',
               overflow: 'hidden',
+              gridColumn: proj.highlight ? '1 / -1' : undefined,
             }}
           >
             {proj.type === 'Soon' && (
@@ -61,11 +62,24 @@ export default function Projects() {
             <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13, marginBottom: 14, fontFamily: "'DM Sans', sans-serif" }}>
               {proj.subtitle}
             </div>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.7, marginBottom: 20, fontFamily: "'DM Sans', sans-serif" }}>
-              {proj.desc}
-            </p>
+            {proj.points ? (
+              <ul style={{ margin: '0 0 20px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {proj.points.map((point) => (
+                  <li key={point} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <span style={{ color: THEME.colors.cyan, marginTop: 3, flexShrink: 0, fontSize: 12 }}>▸</span>
+                    <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif" }}>
+                      {point}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, lineHeight: 1.7, marginBottom: 20, fontFamily: "'DM Sans', sans-serif" }}>
+                {proj.desc}
+              </p>
+            )}
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 20 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: proj.liveUrl ? 20 : 0 }}>
               {proj.tags.map((tag) => (
                 <span
                   key={tag}
@@ -84,41 +98,23 @@ export default function Projects() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              {proj.githubUrl ? (
-                <motion.a
-                  href={proj.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  whileHover={{ x: 4 }}
-                  style={{
-                    color: THEME.colors.cyan,
-                    fontSize: 13,
-                    fontFamily: "'Space Mono', monospace",
-                    textDecoration: 'none',
-                  }}
-                >
-                  Open on GitHub →
-                </motion.a>
-              ) : null}
-              {proj.liveUrl ? (
-                <motion.a
-                  href={proj.liveUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  whileHover={{ x: 4 }}
-                  style={{
-                    color: '#fff',
-                    fontSize: 13,
-                    fontFamily: "'Space Mono', monospace",
-                    textDecoration: 'none',
-                    opacity: 0.9,
-                  }}
-                >
-                  Live Demo →
-                </motion.a>
-              ) : null}
-            </div>
+            {proj.liveUrl ? (
+              <motion.a
+                href={proj.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ x: 4 }}
+                style={{
+                  color: THEME.colors.cyan,
+                  fontSize: 13,
+                  fontFamily: "'Space Mono', monospace",
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                }}
+              >
+                {proj.liveLabel || 'Live Demo'} →
+              </motion.a>
+            ) : null}
           </motion.div>
         ))}
       </div>

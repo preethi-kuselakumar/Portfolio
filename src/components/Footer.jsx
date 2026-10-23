@@ -6,11 +6,6 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '40px', textAlign: 'center' }}>
-      <div style={{ marginBottom: 20 }}>
-        <span style={{ fontFamily: "'Space Mono', monospace", color: THEME.colors.cyan, fontSize: 20, fontWeight: 700 }}>
-          PK<span style={{ color: '#fff' }}>.</span>
-        </span>
-      </div>
       <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginBottom: 20, flexWrap: 'wrap' }}>
         {NAV_LINKS.map((l) => (
           <motion.button

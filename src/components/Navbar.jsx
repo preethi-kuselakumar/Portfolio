@@ -38,17 +38,23 @@ export default function Navbar() {
         transition: 'background 0.4s, border 0.4s',
       }}
     >
-      <span
+      <motion.button
+        type="button"
+        onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
+        whileHover={{ color: THEME.colors.cyan }}
         style={{
-          fontFamily: "'Space Mono', monospace",
-          color: THEME.colors.cyan,
-          fontSize: 18,
+          background: 'none',
+          border: 'none',
+          fontFamily: "'Sora', sans-serif",
+          color: '#fff',
+          fontSize: 16,
           fontWeight: 700,
-          letterSpacing: 1,
+          letterSpacing: 0.2,
+          cursor: 'pointer',
         }}
       >
-        PK<span style={{ color: '#fff' }}>.</span>
-      </span>
+        Preethi K
+      </motion.button>
 
       <div style={{ display: 'flex', gap: 32 }} className="desktop-nav">
         {NAV_LINKS.map((link) => (
@@ -72,24 +78,6 @@ export default function Navbar() {
           </motion.button>
         ))}
       </div>
-
-      <motion.a
-        href="mailto:kpreethi706@gmail.com"
-        whileHover={{ scale: 1.05, boxShadow: `0 0 20px ${THEME.colors.cyan}55` }}
-        style={{
-          padding: '8px 20px',
-          borderRadius: 8,
-          border: `1px solid ${THEME.colors.cyan}`,
-          color: THEME.colors.cyan,
-          fontSize: 13,
-          fontFamily: "'Space Mono', monospace",
-          textDecoration: 'none',
-          letterSpacing: 1,
-          transition: 'all 0.2s',
-        }}
-      >
-        Hire Me
-      </motion.a>
     </motion.nav>
   );
 }
